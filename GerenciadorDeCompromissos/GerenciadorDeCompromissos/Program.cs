@@ -15,15 +15,20 @@ while (true) {
         Console.Write($"Erro: {e.Message}\nDigite uma nova data: ");
     }
 }
-// Console.Write("Digite a hora do compromisso (HH:mm): ");
-// var horaDigitada = Console.ReadLine();
+Console.Write("Digite a hora do compromisso (HH:mm): ");
+var horaDigitada = Console.ReadLine();
 
-// TimeSpan horaCompromisso;
+TimeSpan horaInformada;
 
-// while(!TimeSpan.TryParse(horaDigitada, out horaCompromisso)) {
-//     Console.WriteLine("HORA INVÁLIDA. \nDigite a hora do compromisso (HH:mm): ");
-//     horaDigitada = Console.ReadLine();
-// }
+ while(true) {
+    try {
+        TimeSpan.TryParse(horaDigitada, out horaInformada);
+        compromisso.Hora = horaInformada;
+        break;
+    } catch (Exception e) {
+        Console.Write($"Erro: {e.Message}\nDigite uma nova hora: ");
+    }
+}
 
 // Console.Write("Digite a DESCRIÇÃO para o compromisso: ");
 // var descricao = Console.ReadLine();

@@ -46,7 +46,7 @@ public class Compromisso
     }
 
     private void _validarDataValidaParaCompromisso() {
-        if (_data <= DateTime.Now) {
+        if (_data < DateTime.Now) {
             throw new Exception($"Data {_data.ToString("dd/MM/yyyy")} é inferior a permitida.");
         }
         // if (_data == null) {
