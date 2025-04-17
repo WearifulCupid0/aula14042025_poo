@@ -3,6 +3,7 @@ namespace ConsoleApp.Modelos;
 public class Compromisso
 {
     private DateTime _data;
+    private TimeSpan _hora;
     public String Data
     {
         get { return _data.ToString(); }
@@ -12,7 +13,15 @@ public class Compromisso
             _validarDataValidaParaCompromisso();
         }
     }
-    public TimeSpan Hora { get; set; }
+    public TimeSpan Hora
+    {
+        get { return _hora; }
+        set
+        {
+            _validarHoraInformada(value);
+            _hora = value;
+        }
+    }
     public string Descricao { get; set; }
     public string Local { get; set; }
 
@@ -27,14 +36,24 @@ public class Compromisso
         }
     }
 
+    private void _validarHoraInformada(TimeSpan hora) {
+        if (_data == null) {
+            throw new Exception("Data ainda não informada");
+        }
+        if (_data.Date == DateTime.Now.Date && hora <= DateTime.Now.TimeOfDay) {
+            throw new Exception($"Hora {hora} é inferior ou igual ao horário atual.");
+        }
+    }
+
     private void _validarDataValidaParaCompromisso() {
-        if (_data<=DateTime.Now) {
+        if (_data <= DateTime.Now) {
             throw new Exception($"Data {_data.ToString("dd/MM/yyyy")} é inferior a permitida.");
         }
         // if (_data == null) {
         //     throw new Exception("Data ainda não informada");
         // }
     }
+
     // private TimeSpan _hora;
     // public TimeSpan Hora
     // {
